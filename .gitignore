@@ -1,0 +1,20 @@
+# Django
+*.log
+*.pot
+*.pyc
+__pycache__/
+db.sqlite3
+media/
+
+# Environment
+.env
+
+# IDE
+.vscode/
+.idea/
+
+#languages
+languages/
+
+#import_cheatsheet
+management/commands
