@@ -1,0 +1,35 @@
+version: '3.8'
+services:
+  web:
+    build: .
+    restart: always
+    volumes:
+      - .:/app
+      - static_volume:/app/static
+      - media_volume:/app/media
+    expose:
+      - "8000"
+    env_file:
+      - .env
+    networks:
+      - arcana_network
+  nginx:
+    build: ./nginx
+    restart: always
+    ports:
+      - "80:80"
+      # - "443:443" (commented out for now)
+    volumes:
+      - static_volume:/app/static
+      - media_volume:/app/media
+      - ./nginx/certs:/etc/nginx/certs
+    depends_on:
+      - web
+    networks:
+      - arcana_network
+volumes:
+  static_volume:
+  media_volume:
+networks:
+  arcana_network:
+    driver: bridge
