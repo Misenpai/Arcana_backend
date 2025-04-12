@@ -1,3 +1,4 @@
+# views.py
 from rest_framework import generics
 from .models import Language, Section, Header, SubHeader
 from .serializers import (
@@ -8,59 +9,42 @@ from .serializers import (
 )
 
 class LanguageList(generics.ListCreateAPIView):
-    """
-    View to list all languages or create a new language.
-    """
     queryset = Language.objects.all()
     serializer_class = LanguageSerializer
 
 class LanguageDetail(generics.RetrieveUpdateDestroyAPIView):
-    """
-    View to retrieve, update, or delete a specific language.
-    """
     queryset = Language.objects.all()
     serializer_class = LanguageSerializer
 
 class SectionList(generics.ListCreateAPIView):
-    """
-    View to list all sections or create a new section.
-    """
-    queryset = Section.objects.all()
     serializer_class = SectionSerializer
+    
+    def get_queryset(self):
+        language_id = self.kwargs['language_id']
+        return Section.objects.filter(language_id=language_id)
 
 class SectionDetail(generics.RetrieveUpdateDestroyAPIView):
-    """
-    View to retrieve, update, or delete a specific section.
-    """
     queryset = Section.objects.all()
     serializer_class = SectionSerializer
 
-# Header Views
 class HeaderList(generics.ListCreateAPIView):
-    """
-    View to list all headers or create a new header.
-    """
-    queryset = Header.objects.all()
     serializer_class = HeaderSerializer
+    
+    def get_queryset(self):
+        section_id = self.kwargs['section_id']
+        return Header.objects.filter(section_id=section_id)
 
 class HeaderDetail(generics.RetrieveUpdateDestroyAPIView):
-    """
-    View to retrieve, update, or delete a specific header.
-    """
     queryset = Header.objects.all()
     serializer_class = HeaderSerializer
 
-# SubHeader Views
 class SubHeaderList(generics.ListCreateAPIView):
-    """
-    View to list all subheaders or create a new subheader.
-    """
-    queryset = SubHeader.objects.all()
     serializer_class = SubHeaderSerializer
+    
+    def get_queryset(self):
+        header_id = self.kwargs['header_id']
+        return SubHeader.objects.filter(header_id=header_id)
 
 class SubHeaderDetail(generics.RetrieveUpdateDestroyAPIView):
-    """
-    View to retrieve, update, or delete a specific subheader.
-    """
     queryset = SubHeader.objects.all()
     serializer_class = SubHeaderSerializer

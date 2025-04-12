@@ -18,6 +18,3 @@ languages/
 
 #import_cheatsheet
 management/commands
-
-#nginx
-.nginx/

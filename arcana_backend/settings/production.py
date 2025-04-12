@@ -2,7 +2,7 @@ from .base import *
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['arcana', 'localhost', '127.0.0.1', 'your-production-domain.com']
+ALLOWED_HOSTS = ['arcana', 'localhost', '127.0.0.1', '192.168.29.85','192.168.1.44','172.17.0.1',]
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
